@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RSA Encryption</title>
+</head>
+<body>
+<center>RSA Algorithm using HTML and JavaScript</center>
+<table>
+<tr>
+<td>First Prime Number: </td>
+<td><input type="number" value="53" id="p"></td>
+</tr>
+<tr>
+<td>Second Prime Number: </td>
+<td><input type="number" value="59" id="q"></td>
+</tr>
+<tr>
+<td>Enter Plaintext: </td>
+<td><input type="number" value="89" id="msg"></td>
+</tr>
+<tr>
+<td>Public Key (n): </td>
+<td><p id="publicKey"></p></td>
+</tr>
+<tr>
+<td>Exponent (e): </td>
+<td><p id="exponent"></p></td>
+</tr>
+<tr>
+<td>Private Key (d): </td>
+<td><p id="privateKey"></p></td>
+</tr>
+<tr>
+<td>Cipher text (ct): </td>
+<td><p id="cipher"></p></td>
+</tr>
+<tr>
+<td><button onclick="RSA();">Apply RSA</button></td>
+</tr>
+</table>
+<script type="text/javascript">
+function RSA() {
+var gcd, p, q, n, t, e, d, msg;
+gcd = function(a, b) { return (!b) ? a : gcd(b, a % b); };p = 
+parseInt(document.getElementById("p").value);
+q = parseInt(document.getElementById("q").value);
+msg = parseInt(document.getElementById("msg").value);n = p * q;
+t = (p - 1) * (q - 1);
+for (e = 2; e < t; e++) { if (gcd(e,
+t) === 1) {
+break;
+}
+}
+for (var i = 2; i < 10; i++) {
+var x = 1 + i * t;
+d = Math.floor(x / e);break;
+}
+var ctt = Math.pow(msg, e);
+var ct = ctt % n;
+var dtt = Math.pow(ct, d);
+var dt = dtt % n;
+document.getElementById('publicKey').textContent = n;
+document.getElementById('exponent').textContent = e;
+document.getElementById('privateKey').textContent = d;
+document.getElementById('cipher').textContent = ct;
+}
+</script>
+</body>
+</html>
